@@ -1,7 +1,6 @@
 ﻿using System;
-using DataBase.Infrastructure;
 
-namespace DataBase.Model
+namespace PyTaskBot.Domain
 {
     public class TakenTask
     {

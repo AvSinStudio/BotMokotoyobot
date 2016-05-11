@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DataBase.Model
+namespace PyTaskBot.Domain
 {
     public class Task
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataBase.Model
+namespace PyTaskBot.Domain
 {
     public class StudyYear
     {
