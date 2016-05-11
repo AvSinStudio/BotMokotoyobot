@@ -7,4 +7,8 @@
         public double AveragePercent { get; set; }
         public double FullPointsPercent { get; set; }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 645cccfbf1ab7eec49475e170b028d437ec9a822
