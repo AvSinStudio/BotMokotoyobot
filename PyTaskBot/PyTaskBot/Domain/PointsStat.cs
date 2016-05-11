@@ -1,4 +1,4 @@
-﻿namespace DataBase.Model
+﻿namespace PyTaskBot.Domain
 {
     public class PointsStat
     {
@@ -6,5 +6,5 @@
         public double AveragePoint { get; set; }
         public double AveragePercent { get; set; }
         public double FullPointsPercent { get; set; }
-   
+    }
 }
