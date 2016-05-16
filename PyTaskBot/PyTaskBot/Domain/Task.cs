@@ -26,7 +26,7 @@ namespace PyTaskBot.Domain
         [JsonProperty("full_points_percent")]
         private double FullPointsPercent { get; set; }
 
-        public PointsStat PointsStat => new PointsStat()
+        public PointsStat PointsStat => new PointsStat
         {
             AveragePercent = AveragePercent,
             AveragePoint = AveragePoint,

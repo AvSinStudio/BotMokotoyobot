@@ -11,14 +11,15 @@ namespace PyTaskBot.Infrastructure
     {
         public const string Uri = @"http://pytask.info/db/tasks_full.json";
 
+        public readonly Dictionary<string, Task> Db;
+
         public Database()
         {
             var json = DownloadJson(Uri);
-            var db = Unmarshaller<Dictionary<string, Task>>.Unmarshal(json);
-            Console.ReadKey();
+            Db = Unmarshaller<Dictionary<string, Task>>.Unmarshal(json);
         }
 
-        public string DownloadJson(string url = Uri)
+        private static string DownloadJson(string url)
         {
             string json;
             using (var webClient = new WebClient())
