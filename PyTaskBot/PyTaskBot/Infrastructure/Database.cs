@@ -1,13 +1,25 @@
-﻿namespace DataBase.Infrastructure
+﻿using System.Net;
+
+namespace PyTaskBot.Infrastructure
 {
     public class Database
     {
-        
-        public string DownloadJson(string url)
+        public const string Uri = @"http://pytask.info/db/tasks_full.json";
+
+        public string DownloadJson(string url = Uri)
         {
-            var json = "";
-            using (var webClient = new System.Net.WebClient())
-                json = webClient.DownloadString(url);
+            string json;
+            using (var webClient = new WebClient())
+            {
+                try
+                {
+                    json = webClient.DownloadString(url);
+                }
+                catch (WebException)
+                {
+                    return null;
+                }
+            }
             return json;
         }
     }

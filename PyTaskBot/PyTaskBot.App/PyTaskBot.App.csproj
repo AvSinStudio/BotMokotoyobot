@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{57EA8AF6-A100-49F9-BD16-B54F48861F9D}</ProjectGuid>
+    <ProjectGuid>{3CC2BC19-ED94-4BFC-941B-A33D0810CFC5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PyTaskBot</RootNamespace>
-    <AssemblyName>PyTaskBot</AssemblyName>
+    <RootNamespace>PyTaskBot.App</RootNamespace>
+    <AssemblyName>PyTaskBot.App</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -48,6 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PyTaskBot\PyTaskBot.csproj">
+      <Project>{3baa05e9-1d14-449f-97cd-9dfc30214ceb}</Project>
+      <Name>PyTaskBot</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

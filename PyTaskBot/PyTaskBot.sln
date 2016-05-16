@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PyTaskBot.App", "PyTaskBot.App\PyTaskBot.App.csproj", "{57EA8AF6-A100-49F9-BD16-B54F48861F9D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PyTaskBot", "PyTaskBot\PyTaskBot.csproj", "{3BAA05E9-1D14-449F-97CD-9DFC30214CEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PyTaskBot.App", "PyTaskBot.App\PyTaskBot.App.csproj", "{3CC2BC19-ED94-4BFC-941B-A33D0810CFC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{57EA8AF6-A100-49F9-BD16-B54F48861F9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57EA8AF6-A100-49F9-BD16-B54F48861F9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57EA8AF6-A100-49F9-BD16-B54F48861F9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57EA8AF6-A100-49F9-BD16-B54F48861F9D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3BAA05E9-1D14-449F-97CD-9DFC30214CEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3BAA05E9-1D14-449F-97CD-9DFC30214CEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BAA05E9-1D14-449F-97CD-9DFC30214CEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BAA05E9-1D14-449F-97CD-9DFC30214CEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CC2BC19-ED94-4BFC-941B-A33D0810CFC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CC2BC19-ED94-4BFC-941B-A33D0810CFC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CC2BC19-ED94-4BFC-941B-A33D0810CFC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CC2BC19-ED94-4BFC-941B-A33D0810CFC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

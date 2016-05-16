@@ -1,6 +1,4 @@
-﻿using System.Reflection.Emit;
-
-namespace PyTaskBot.Domain
+﻿namespace PyTaskBot.Domain
 {
     public class Student
     {

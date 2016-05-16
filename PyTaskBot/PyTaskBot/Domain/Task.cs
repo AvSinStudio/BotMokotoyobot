@@ -9,7 +9,5 @@ namespace PyTaskBot.Domain
         public List<TakenTask> TakenTasks { get; set; }
         public PointsStat PointsStat { get; set; }
         public Dictionary<StudyYear, PointsStat> Annual { get; set; }
-
-
     }
 }
