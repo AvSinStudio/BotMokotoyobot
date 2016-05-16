@@ -50,6 +50,7 @@
     <Compile Include="Domain\TakenTask.cs" />
     <Compile Include="Domain\Task.cs" />
     <Compile Include="Infrastructure\Database.cs" />
+    <Compile Include="Infrastructure\Unmarshaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

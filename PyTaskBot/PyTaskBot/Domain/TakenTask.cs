@@ -1,14 +1,36 @@
 ﻿using System;
+using System.Globalization;
+using Newtonsoft.Json;
 
 namespace PyTaskBot.Domain
 {
     public class TakenTask
     {
-        public Student Student { get; set; }
-        public DateTime TakenDate { get; set; }
-        public DateTime LastSubmitDate { get; set; }
+        [JsonProperty("student")]
+        private string StudentRaw { get; set; }
+
+        [JsonProperty("first_date")]
+        private string TakenDateRaw { get; set; }
+
+        [JsonProperty("second_date")]
+        private string LastSubmitDateRaw { get; set; }
+
+        [JsonProperty("points")]
         public int Points { get; set; }
+
+        [JsonProperty("comment")]
         public string Comment { get; set; }
-        public StudyYear StudyYear { get; set; }
+
+        public Student Student
+        {
+            get
+            {
+                var name = StudentRaw.Split(' ');
+                return new Student() {FirstName = name[0], LastName = name[1]};
+            }
+        }
+
+        public DateTime TakenDate => DateTime.Parse(TakenDateRaw);
+        public DateTime LastSubmitDate => DateTime.Parse(LastSubmitDateRaw);
     }
 }
