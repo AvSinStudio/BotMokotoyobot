@@ -10,7 +10,6 @@ namespace PyTaskBot.App
     {
         static void Main(string[] args)
         {
-            
         }
     }
 }
