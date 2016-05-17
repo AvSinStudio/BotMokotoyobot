@@ -29,8 +29,11 @@ namespace PyTaskBot.Domain
                 return new Student() {FirstName = name[0], LastName = name[1]};
             }
         }
+       
 
         public DateTime TakenDate => DateTime.Parse(TakenDateRaw);
         public DateTime LastSubmitDate => DateTime.Parse(LastSubmitDateRaw);
+
+      
     }
 }
