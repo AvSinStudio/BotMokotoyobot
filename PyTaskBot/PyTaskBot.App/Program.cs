@@ -7,6 +7,7 @@ using PyTaskBot.Infrastructure;
 using Telegram.Bot.Types;
 using System.Configuration;
 using Newtonsoft.Json;
+using PyTaskBot.App.Bot;
 
 namespace PyTaskBot.App
 {
@@ -14,13 +15,13 @@ namespace PyTaskBot.App
     {
         static void Main(string[] args)
         {
-            var db = new Database();
+            var db = new PyTaskDatabase("http://pytask.info/db/db_full.json");
             var token = ConfigurationManager.AppSettings.Get("token");
             if (token == null)
             {
                 throw new ConfigurationErrorsException("You must specify bot token in configuration file");
             }
-            new Bot(token, db).MainLoop();
+            new TelegramBot(token, db).MainLoop();
         }
     }
 }
