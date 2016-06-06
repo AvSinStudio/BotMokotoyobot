@@ -15,16 +15,17 @@ namespace PyTaskBot.App.Bot
     {
         private readonly Telegram.Bot.Api botApi;
         private int Offset { get; set; }
+        private Sender sender;
         private readonly Executor executor;
         public TelegramBot(string token, PyTaskDatabase database)
         {
+            sender = new Sender();
             botApi = new Telegram.Bot.Api(token);
-            
-            Func<long, string, Task<Message>> sender = (x, y) => botApi.SendTextMessage(x, y);
-            executor = new Executor(sender);
+            executor = new Executor();
             executor.Register(new HelpCommand());
             executor.Register(new ListTaskCommand(database));
             executor.Register(new ListCategoriesCommand(database));
+            executor.Register(new TaskInfoCommand(database));
             executor.Register(new ListTaskInCategoryCommand(database));
             var me = botApi.GetMe();
             Console.WriteLine($"Hello, I'm {me.Result.Username}");
@@ -44,9 +45,9 @@ namespace PyTaskBot.App.Bot
                     {
                         Debug.WriteLine(update.Message.Text);
                         botApi.SendChatAction(update.Message.Chat.Id, ChatAction.Typing);
-                        executor.Execute(update.Message.Text, update.Message.Chat.Id);
+                        var response = executor.GetResponse(update.Message.Text);
+                        sender.Send(botApi, update.Message.Chat.Id, response);
                     }
-
                     Offset = update.Id + 1;
                 }
             }

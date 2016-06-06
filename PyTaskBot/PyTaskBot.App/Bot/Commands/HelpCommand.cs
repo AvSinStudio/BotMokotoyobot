@@ -11,10 +11,12 @@ namespace PyTaskBot.App.Bot.Commands
         {
         }
 
-        public override void Execute(string query, long id, Func<long, string, Task<Message>> sender)
+        public override string CreateResponse(string query)
         {
-            sender(id, "help");
+            return "help";
         }
+
+        
         
     }
 }

@@ -12,17 +12,17 @@ namespace PyTaskBot.Infrastructure
         {
         }
 
-        public IEnumerable<string> GetListOfTasks()
+        public IEnumerable<string> GetTasks()
         {
             return Db.Keys.OrderBy(x => x, StringComparer.OrdinalIgnoreCase);
         }
 
         public Task GetInfoAboutTask(string name)
         {
-            return Db.FirstOrDefault(x => x.Key == name).Value;
+            return Db.FirstOrDefault(x => string.Equals(x.Key, name, StringComparison.OrdinalIgnoreCase)).Value;
         }
 
-        public IEnumerable<string> GetListOfCategories()
+        public IEnumerable<string> GetCategories()
         {
             return Db.Values.Select(x => x.Category).Distinct().OrderBy(x => x, StringComparer.OrdinalIgnoreCase);
         }
@@ -37,7 +37,17 @@ namespace PyTaskBot.Infrastructure
         }
         public IEnumerable<string> GetNamesOfTasksInCategory(string category)
         {
-            return Db.Where(x => x.Value.Category == category).Select(x => x.Key);
+            return Db.Where(x => string.Equals(x.Value.Category, category, StringComparison.OrdinalIgnoreCase)).Select(x => x.Key);
         }
+
+        public bool IsTask(string query)
+        {
+            return Db.Any(x => x.Key == query);
+        }
+        public bool IsCategory(string query)
+        {
+            return Db.Any(x => x.Value.Category == query);
+        }
+
     }
 }

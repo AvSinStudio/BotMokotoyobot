@@ -12,5 +12,7 @@ namespace PyTaskBot.Domain
         public double AveragePercent { get; set; }
         [JsonProperty("full_points_percent")]
         public double FullPointsPercent { get; set; }
+        [JsonProperty("students_full_points")]
+        public int FullPointsAmount { get; set; }
     }
 }

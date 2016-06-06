@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using PyTaskBot.Infrastructure;
 using Telegram.Bot;
@@ -11,11 +13,20 @@ namespace PyTaskBot.App.Bot.Commands
         protected Command(string name, string help)
         {
             this.Name = name;
+            this.Aliases = new List<string>();
+            Aliases.Add(Name);
             this.Help = help;
         }
         public string Name { get; }
         public string Help { get; }
+        protected List<String> Aliases;
+
+        public bool CheckAliases(string query)
+        {
+            return Aliases.Any(x => string.Equals(x, query, StringComparison.OrdinalIgnoreCase));
+        }
+
         protected Database Db;
-        public abstract void Execute(string query, long id, Func<long, string, Task<Message>> sender);
+        public abstract string CreateResponse(string query);
     }
 }

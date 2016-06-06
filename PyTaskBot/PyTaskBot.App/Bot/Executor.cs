@@ -12,17 +12,16 @@ namespace PyTaskBot.App.Bot
     class Executor
     {
         private readonly List<Command> commands = new List<Command>();
-        private MessageParser mp;
-        private Func<long, string, Task<Message>> sender; 
-        public Executor(Func<long, string, Task<Message>> sender )
+        
+        
+        public Executor()
         {
-            this.sender = sender;
         }
 
         public void Register(Command cmd)
         {
             commands.Add(cmd);
-            mp = new MessageParser();
+            
         }
 
         public string[] GetAvailableCommandsName()
@@ -30,22 +29,22 @@ namespace PyTaskBot.App.Bot
             return commands.Select(x => x.Name).ToArray();
         }
 
-        public Command FindCommandByName(string query)
+        private Command TryGetCommand(string query)
         {
-            var words = query.Split(' ');
-            return commands.FirstOrDefault(x => string.Equals('/' + x.Name, words[0], StringComparison.OrdinalIgnoreCase));
+            var trimmed = query.Trim('/');
+            return commands.FirstOrDefault(x => x.CheckAliases(trimmed));
         }
 
-        public void Execute(string query, long id)
+        public string GetResponse(string query)
         {
-            var cmd = FindCommandByName(query);
+            var cmd = TryGetCommand(query);
             if (cmd == null)
             {
-                var i = "";
-                mp.TryParse(query, out i);
+                return "Not recognized";
+
             }
             else
-                cmd.Execute(query, id, sender);
+               return cmd.CreateResponse(query);
         }
     }
 }
