@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using PyTaskBot.Infrastructure;
-using Telegram.Bot.Types;
-using System.Configuration;
-using Newtonsoft.Json;
+﻿using System.Configuration;
 using PyTaskBot.App.Bot;
+using PyTaskBot.Infrastructure;
 
 namespace PyTaskBot.App
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var db = new PyTaskDatabase("http://pytask.info/db/db_full.json");
             var token = ConfigurationManager.AppSettings.Get("token");

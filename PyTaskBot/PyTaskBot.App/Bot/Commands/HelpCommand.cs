@@ -1,11 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
-using Telegram.Bot;
-using Telegram.Bot.Types;
-
-namespace PyTaskBot.App.Bot.Commands
+﻿namespace PyTaskBot.App.Bot.Commands
 {
-    public class HelpCommand:Command
+    public class HelpCommand : Command
     {
         public HelpCommand() : base("help", "print help")
         {
@@ -13,10 +8,7 @@ namespace PyTaskBot.App.Bot.Commands
 
         public override string CreateResponse(string query)
         {
-            return "help";
+            return "Напиши меня.";
         }
-
-        
-        
     }
 }

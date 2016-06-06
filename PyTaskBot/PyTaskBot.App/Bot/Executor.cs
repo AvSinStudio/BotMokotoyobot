@@ -1,27 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PyTaskBot.App.Bot.Commands;
-using Telegram.Bot;
-using Telegram.Bot.Types;
 
 namespace PyTaskBot.App.Bot
 {
-    class Executor
+    internal class Executor
     {
         private readonly List<Command> commands = new List<Command>();
         
-        
-        public Executor()
-        {
-        }
-
         public void Register(Command cmd)
         {
             commands.Add(cmd);
-            
         }
 
         public string[] GetAvailableCommandsName()
@@ -40,11 +29,9 @@ namespace PyTaskBot.App.Bot
             var cmd = TryGetCommand(query);
             if (cmd == null)
             {
-                return "Not recognized";
-
+                return "Команда не опознана!";
             }
-            else
-               return cmd.CreateResponse(query);
+            return cmd.CreateResponse(query);
         }
     }
 }

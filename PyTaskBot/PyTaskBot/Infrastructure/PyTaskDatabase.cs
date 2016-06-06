@@ -6,10 +6,22 @@ using PyTaskBot.Domain;
 
 namespace PyTaskBot.Infrastructure
 {
-    public class PyTaskDatabase:Database
+    public class PyTaskDatabase : Database<Task>
     {
         public PyTaskDatabase(string uri) : base(uri)
         {
+            InitNames();
+        }
+
+        private PyTaskDatabase(Dictionary<string, Task> db) : base(db)
+        {
+            InitNames();
+        }
+
+        public void InitNames()
+        {
+            foreach (var entry in Db)
+                entry.Value.Name = entry.Key;
         }
 
         public IEnumerable<string> GetTasks()
@@ -29,11 +41,11 @@ namespace PyTaskBot.Infrastructure
 
         public Task GetTaskWithMax<T>(Func<Task, T> maxFunc)
         {
-            return Db.Values.OrderBy(maxFunc).FirstOrDefault();
-        }
-        public Task GetTaskWithMin<T>(Func<Task, T> maxFunc)
-        {
             return Db.Values.OrderByDescending(maxFunc).FirstOrDefault();
+        }
+        public Task GetTaskWithMin<T>(Func<Task, T> minFunc)
+        {
+            return Db.Values.OrderBy(minFunc).FirstOrDefault();
         }
         public IEnumerable<string> GetNamesOfTasksInCategory(string category)
         {
@@ -46,8 +58,14 @@ namespace PyTaskBot.Infrastructure
         }
         public bool IsCategory(string query)
         {
-            return Db.Any(x => x.Value.Category == query);
+            return Db.Any(x => string.Equals(x.Value.Category,query, StringComparison.OrdinalIgnoreCase));
         }
 
+        public PyTaskDatabase GetTaskInCategory(string category)
+        {
+            return new PyTaskDatabase(Db
+                    .Where(x => string.Equals(x.Value.Category, category, StringComparison.OrdinalIgnoreCase))
+                    .ToDictionary(x => x.Key, x => x.Value));
+        }
     }
 }

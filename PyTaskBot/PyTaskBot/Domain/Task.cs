@@ -36,7 +36,9 @@ namespace PyTaskBot.Domain
             AveragePoint = AveragePoint,
             Max = Max,
             FullPointsPercent = FullPointsPercent,
-            FullPointsAmount = FullPointsAmount
+            FullPointsCount = FullPointsAmount,
+            Count = TakenTasks.Count 
         };
+        public string Name { get; set; }
     }
 }

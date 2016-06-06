@@ -1,28 +1,26 @@
-﻿using System;
-using System.Threading.Tasks;
-using PyTaskBot.App.Bot.Wrappers;
+﻿using PyTaskBot.App.Bot.Wrappers;
 using PyTaskBot.Infrastructure;
-
-using Telegram.Bot.Types;
 
 namespace PyTaskBot.App.Bot.Commands
 {
-    public class TaskInfoCommand: Command
+    public class TaskInfoCommand : Command
     {
-        private TaskWrapper taskWrapper;
+        private readonly TaskWrapper taskWrapper;
+
         public TaskInfoCommand(PyTaskDatabase db) : base("info", "give info about the task")
         {
-            taskWrapper = new TaskWrapper(db);
-            
+            taskWrapper = new TaskWrapper();
+
             foreach (var x in db.GetTasks())
             {
                 Aliases.Add(x);
             }
         }
 
-        public override string CreateResponse(string query)
+        public override string CreateResponse(string name)
         {
-            return taskWrapper.GetWrapped(query);
+            var task = Db.GetInfoAboutTask(name);
+            return taskWrapper.GetWrapped(task);
         }
     }
 }

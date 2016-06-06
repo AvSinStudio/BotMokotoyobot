@@ -7,18 +7,23 @@ using PyTaskBot.Domain;
 
 namespace PyTaskBot.Infrastructure
 {
-    public abstract class Database
+    public abstract class Database<T>
     {
 
 
-        protected readonly Dictionary<string, Task> Db;
+        protected readonly Dictionary<string, T> Db;
 
-        public Database(string uri)
+        protected Database(string uri)
         {
             var json = JsonDownloader.DownloadJson(uri);
-            Db = Unmarshaller<Dictionary<string, Task>>.Unmarshal(json);
+            Db = Unmarshaller<Dictionary<string, T>>.Unmarshal(json);
         }
 
-       
+        protected Database(Dictionary<string, T> db)
+        {
+            this.Db = db;
+        }
+
+
     }
 }

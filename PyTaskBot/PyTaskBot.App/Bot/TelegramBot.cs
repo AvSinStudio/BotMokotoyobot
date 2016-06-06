@@ -1,44 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 using PyTaskBot.App.Bot.Commands;
 using PyTaskBot.Infrastructure;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 
 namespace PyTaskBot.App.Bot
 {
-    class TelegramBot
+    internal class TelegramBot
     {
-        private readonly Telegram.Bot.Api botApi;
-        private int Offset { get; set; }
-        private Sender sender;
+        private readonly Api botApi;
         private readonly Executor executor;
+        private readonly Sender sender;
+
         public TelegramBot(string token, PyTaskDatabase database)
         {
             sender = new Sender();
-            botApi = new Telegram.Bot.Api(token);
+            botApi = new Api(token);
             executor = new Executor();
             executor.Register(new HelpCommand());
             executor.Register(new ListTaskCommand(database));
             executor.Register(new ListCategoriesCommand(database));
             executor.Register(new TaskInfoCommand(database));
             executor.Register(new ListTaskInCategoryCommand(database));
+            executor.Register(new SpecialCommand(database));
             var me = botApi.GetMe();
             Console.WriteLine($"Hello, I'm {me.Result.Username}");
             Offset = botApi.MessageOffset;
-            
         }
+
+        private int Offset { get; set; }
 
         public void MainLoop()
         {
             while (true)
             {
                 var updates = botApi.GetUpdates(Offset);
-                
+
                 foreach (var update in updates.Result)
                 {
                     if (update.Message.Type == MessageType.TextMessage)
@@ -53,5 +51,4 @@ namespace PyTaskBot.App.Bot
             }
         }
     }
-
 }
