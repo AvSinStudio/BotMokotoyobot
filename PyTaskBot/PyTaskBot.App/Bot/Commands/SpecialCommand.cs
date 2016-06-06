@@ -14,18 +14,18 @@ namespace PyTaskBot.App.Bot.Commands
         private readonly TaskWrapper taskWrapper;
         private readonly PyTaskDatabase db;
 
-        private Regex regex = new Regex(@"(У какой задачи )?(?<Scope>(минимальн|максимальн)(ый средний (балл|процент)|ое количество сдавших))( в категории (?<Category>[a-zа-яёA-ZА-Я -A-z]+))?(\?)?");
+        private const string regex = @"(У какой задачи )?(?<Scope>(минимальн|максимальн)(ый средний (балл|процент)|ое количество сдавших))( в категории (?<Category>[a-zа-яёA-ZА-Я -A-z]+))?(\?)?";
         public SpecialCommand(PyTaskDatabase db) : base("min", "command to take task with min param")
         {
             taskWrapper = new TaskWrapper();
             this.db = db;
-            Aliases.Add(@"(У какой задачи )?(?<Scope>(минимальн|максимальн)(ый средний (балл|процент)|ое количество сдавших))( в категории (?<Category>[a-zа-яёA-ZА-Я -A-z]+))?(\?)?");
+            Aliases.Add(regex);
         }
 
         public override string CreateResponse(string query)
         {
             var toSearch = db;
-            var matches = regex.Matches(query);
+            var matches = Regex.Matches(query, regex, RegexOptions.IgnoreCase);
             var question = matches[0].Groups["Scope"].Value;
             var category = matches[0].Groups["Category"].Value;
             var spacePos = question.IndexOf(" ", StringComparison.OrdinalIgnoreCase);
