@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bot\Commands\FollowCommand.cs" />
     <Compile Include="Bot\Commands\ListCategoriesCommand.cs" />
     <Compile Include="Bot\Commands\HelpCommand.cs" />
     <Compile Include="Bot\Commands\Command.cs" />

@@ -6,7 +6,7 @@
         {
         }
 
-        public override string CreateResponse(string query)
+        public override string CreateResponse(string[] args)
         {
             return "Напиши меня.";
         }

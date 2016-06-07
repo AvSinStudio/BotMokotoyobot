@@ -24,14 +24,14 @@ namespace PyTaskBot.App.Bot
             return commands.FirstOrDefault(x => x.CheckAliases(trimmed));
         }
 
-        public string GetResponse(string query)
+        public string GetResponse(string[] args)
         {
-            var cmd = TryGetCommand(query);
+            var cmd = TryGetCommand(args[0]);
             if (cmd == null)
             {
                 return "Команда не опознана!";
             }
-            return cmd.CreateResponse(query);
+            return cmd.CreateResponse(args);
         }
     }
 }

@@ -17,8 +17,9 @@ namespace PyTaskBot.App.Bot.Commands
             }
         }
 
-        public override string CreateResponse(string name)
+        public override string CreateResponse(string[]args)
         {
+            var name = args[0];
             var task = db.GetInfoAboutTask(name);
             return taskWrapper.GetWrapped(task);
         }

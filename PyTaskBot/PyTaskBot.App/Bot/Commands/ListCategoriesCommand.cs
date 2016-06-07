@@ -11,7 +11,7 @@ namespace PyTaskBot.App.Bot.Commands
             this.db = db;
         }
 
-        public override string CreateResponse(string query)
+        public override string CreateResponse(string[] args)
         {
             return string.Join("\n", db.GetCategories());
         }

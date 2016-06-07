@@ -17,8 +17,9 @@ namespace PyTaskBot.App.Bot.Commands
             }
         }
 
-        public override string CreateResponse(string query)
+        public override string CreateResponse(string[] args)
         {
+            var query = args[0];
             var tasks = db.GetNamesOfTasksInCategory(query);
             return $"Категория: {query}\n\n" +
                    $"Таски:\n" +

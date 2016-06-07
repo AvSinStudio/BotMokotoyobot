@@ -14,16 +14,17 @@ namespace PyTaskBot.App.Bot.Commands
         private readonly TaskWrapper taskWrapper;
         private readonly PyTaskDatabase db;
 
-        private const string regex = @"(У какой задачи )?(?<Scope>(минимальн|максимальн)(ый средний (балл|процент)|ое количество сдавших))( в категории (?<Category>[a-zа-яёA-ZА-Я -A-z]+))?(\?)?";
-        public SpecialCommand(PyTaskDatabase db) : base("min", "command to take task with min param")
+        private const string regex = @"([a-zA-Zа-яёА-ЯЁ\-\., ])?(?<Scope>(минимальн|максимальн)(ый (средний)? (балл|процент)|ое количество сдавших))( в категории (?<Category>[a-zA-Zа-яёА-ЯЁ\-\., ]+))?(\?)?";
+        public SpecialCommand(PyTaskDatabase db) : base("min", "command to take task with some param")
         {
             taskWrapper = new TaskWrapper();
             this.db = db;
             Aliases.Add(regex);
         }
 
-        public override string CreateResponse(string query)
+        public override string CreateResponse(string[] args)
         {
+            var query = args[0];
             var toSearch = db;
             var matches = Regex.Matches(query, regex, RegexOptions.IgnoreCase);
             var question = matches[0].Groups["Scope"].Value;
@@ -32,7 +33,7 @@ namespace PyTaskBot.App.Bot.Commands
             var isMin = question.Substring(0, spacePos).StartsWith("мин");
             var scope = question.Substring(spacePos + 1).Trim();
             var scopeFunc = GetScope(scope);
-            if (category != "")
+            if (query.Contains("в категории"))
             {
                 if (db.IsCategory(category))
                     toSearch = db.GetTaskInCategory(category);

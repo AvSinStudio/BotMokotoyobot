@@ -43,7 +43,7 @@ namespace PyTaskBot.App.Bot
                     {
                         Debug.WriteLine(update.Message.Text);
                         botApi.SendChatAction(update.Message.Chat.Id, ChatAction.Typing);
-                        var response = executor.GetResponse(update.Message.Text);
+                        var response = executor.GetResponse(new string[2] { update.Message.Text, update.Message.Chat.Id.ToString()});
                         sender.Send(botApi, update.Message.Chat.Id, response);
                     }
                     Offset = update.Id + 1;
