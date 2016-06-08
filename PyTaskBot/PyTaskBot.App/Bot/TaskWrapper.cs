@@ -1,5 +1,4 @@
 ﻿using PyTaskBot.Domain;
-using PyTaskBot.Infrastructure;
 
 namespace PyTaskBot.App.Bot.Wrappers
 {
@@ -7,7 +6,6 @@ namespace PyTaskBot.App.Bot.Wrappers
     {
         public string GetWrapped(Task task)
         {
-
             var stat = task.PointsStat;
             return $"Таск: {task.Name}\n\n" +
                    $"Категория: {task.Category}\n" +

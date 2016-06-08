@@ -7,20 +7,22 @@ namespace PyTaskBot.App.Bot.Commands
     {
         private readonly TaskWrapper taskWrapper;
         private readonly PyTaskDatabase db;
+
         public TaskInfoCommand(PyTaskDatabase db) : base("info", "give info about the task")
         {
             taskWrapper = new TaskWrapper();
             this.db = db;
-            foreach (var x in db.GetTasks())
+            foreach (var x in db.TasksNamesSet)
             {
                 Aliases.Add(x);
             }
         }
 
-        public override string CreateResponse(string[]args)
+        public override string CreateResponse(params object[]args)
         {
-            var name = args[0];
-            var task = db.GetInfoAboutTask(name);
+            var name = args[0] as string;
+
+            var task = db.GetTask(name);
             return taskWrapper.GetWrapped(task);
         }
     }

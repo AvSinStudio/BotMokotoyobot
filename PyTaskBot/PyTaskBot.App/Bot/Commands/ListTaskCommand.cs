@@ -11,9 +11,9 @@ namespace PyTaskBot.App.Bot.Commands
             this.db = db;
         }
 
-        public override string CreateResponse(string[] args)
+        public override string CreateResponse(params object[] args)
         {
-            return string.Join("\n", db.GetTasks());
+            return string.Join("\n", db.SortedTasksNames);
         }
     }
 }

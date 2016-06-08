@@ -67,7 +67,6 @@
     <Compile Include="Bot\Commands\ListTaskInCategoryCommand.cs" />
     <Compile Include="Bot\Commands\TaskInfoCommand.cs" />
     <Compile Include="Bot\Commands\SpecialCommand.cs" />
-    <Compile Include="Bot\Sender.cs" />
     <Compile Include="Bot\TelegramBot.cs" />
     <Compile Include="Bot\Executor.cs" />
     <Compile Include="Bot\TaskWrapper.cs" />

@@ -1,19 +1,19 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Newtonsoft.Json;
 
 namespace PyTaskBot.Domain
 {
     public class Task
     {
+        [JsonProperty("name")]
+        public string Name { get; set; }
 
         [JsonProperty("category")]
         public string Category { get; set; }
 
         [JsonProperty("students")]
         public List<TakenTask> TakenTasks { get; set; }
-
-        // public Dictionary<StudyYear, PointsStat> Annual { get; set; }
+        
         [JsonProperty("max")]
         private int Max { get; set; }
 
@@ -24,7 +24,6 @@ namespace PyTaskBot.Domain
         private double AveragePercent { get; set; }
 
         [JsonProperty("full_points_percent")]
-
         private double FullPointsPercent { get; set; }
 
         [JsonProperty("students_full_points")]
@@ -39,6 +38,5 @@ namespace PyTaskBot.Domain
             FullPointsCount = FullPointsAmount,
             Count = TakenTasks.Count 
         };
-        public string Name { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using PyTaskBot.App.Bot.Wrappers;
-using PyTaskBot.Infrastructure;
+﻿using PyTaskBot.Infrastructure;
 
 namespace PyTaskBot.App.Bot.Commands
 {
@@ -7,19 +6,19 @@ namespace PyTaskBot.App.Bot.Commands
     {
         private PyTaskDatabase db;
 
-
         public ListTaskInCategoryCommand(PyTaskDatabase db) : base("catinfo", "show list of tasks in category")
         {
             this.db = db;
-            foreach (var x in db.GetCategories())
+            foreach (var x in db.CategoriesSet)
             {
                 Aliases.Add(x);
             }
         }
 
-        public override string CreateResponse(string[] args)
+        public override string CreateResponse(params object[] args)
         {
-            var query = args[0];
+            var query = args[0] as string;
+
             var tasks = db.GetNamesOfTasksInCategory(query);
             return $"Категория: {query}\n\n" +
                    $"Таски:\n" +

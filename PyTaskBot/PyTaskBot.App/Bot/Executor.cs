@@ -21,17 +21,13 @@ namespace PyTaskBot.App.Bot
         private Command TryGetCommand(string query)
         {
             var trimmed = query.Trim('/');
-            return commands.FirstOrDefault(x => x.CheckAliases(trimmed));
+            return commands.FirstOrDefault(x => x.HasAlias(trimmed));
         }
 
-        public string GetResponse(string[] args)
+        public string GetResponse(params object[] args)
         {
-            var cmd = TryGetCommand(args[0]);
-            if (cmd == null)
-            {
-                return "Команда не опознана!";
-            }
-            return cmd.CreateResponse(args);
+            var cmd = TryGetCommand(args[0] as string);
+            return cmd == null ? "Команда не опознана!" : cmd.CreateResponse(args);
         }
     }
 }

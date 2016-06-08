@@ -11,12 +11,13 @@ namespace PyTaskBot.App.Bot
     {
         private readonly Api botApi;
         private readonly Executor executor;
-        private readonly Sender sender;
+
+        private int Offset { get; set; }
 
         public TelegramBot(string token, PyTaskDatabase database)
         {
-            sender = new Sender();
             botApi = new Api(token);
+
             executor = new Executor();
             executor.Register(new HelpCommand());
             executor.Register(new ListTaskCommand(database));
@@ -24,12 +25,12 @@ namespace PyTaskBot.App.Bot
             executor.Register(new TaskInfoCommand(database));
             executor.Register(new ListTaskInCategoryCommand(database));
             executor.Register(new SpecialCommand(database));
+
             var me = botApi.GetMe();
             Console.WriteLine($"Hello, I'm {me.Result.Username}");
+
             Offset = botApi.MessageOffset;
         }
-
-        private int Offset { get; set; }
 
         public void MainLoop()
         {
@@ -43,9 +44,10 @@ namespace PyTaskBot.App.Bot
                     {
                         Debug.WriteLine(update.Message.Text);
                         botApi.SendChatAction(update.Message.Chat.Id, ChatAction.Typing);
-                        var response = executor.GetResponse(new string[2] { update.Message.Text, update.Message.Chat.Id.ToString()});
-                        sender.Send(botApi, update.Message.Chat.Id, response);
+                        var response = executor.GetResponse(update.Message.Text, update.Message.Chat.Id);
+                        botApi.SendTextMessage(update.Message.Chat.Id, response);
                     }
+
                     Offset = update.Id + 1;
                 }
             }

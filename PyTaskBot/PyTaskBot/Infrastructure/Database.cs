@@ -1,29 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
-using Newtonsoft.Json;
-using PyTaskBot.Domain;
+﻿using System.Collections.Generic;
 
 namespace PyTaskBot.Infrastructure
 {
     public abstract class Database<T>
     {
-
-
-        protected readonly Dictionary<string, T> Db;
-
+        protected readonly HashSet<T> Data;
+        
         protected Database(string uri)
         {
             var json = JsonDownloader.DownloadJson(uri);
-            Db = Unmarshaller<Dictionary<string, T>>.Unmarshal(json);
+            Data = new HashSet<T>(Unmarshaller<Dictionary<string, T>>.Unmarshal(json).Values);
         }
 
-        protected Database(Dictionary<string, T> db)
+        protected Database(HashSet<T> data)
         {
-            this.Db = db;
+            Data = data;
         }
-
-
     }
 }

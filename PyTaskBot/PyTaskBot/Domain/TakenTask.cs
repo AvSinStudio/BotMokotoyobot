@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using Newtonsoft.Json;
 
 namespace PyTaskBot.Domain
@@ -26,14 +25,11 @@ namespace PyTaskBot.Domain
             get
             {
                 var name = StudentRaw.Split(' ');
-                return new Student() {FirstName = name[0], LastName = name[1]};
+                return new Student {FirstName = name[0], LastName = name[1]};
             }
         }
-       
 
         public DateTime TakenDate => DateTime.Parse(TakenDateRaw);
         public DateTime LastSubmitDate => DateTime.Parse(LastSubmitDateRaw);
-
-      
     }
 }
