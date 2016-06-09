@@ -59,22 +59,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bot\Commands\FollowCommand.cs" />
-    <Compile Include="Bot\Commands\ListCategoriesCommand.cs" />
-    <Compile Include="Bot\Commands\HelpCommand.cs" />
-    <Compile Include="Bot\Commands\Command.cs" />
-    <Compile Include="Bot\Commands\ListTaskCommand.cs" />
-    <Compile Include="Bot\Commands\ListTaskInCategoryCommand.cs" />
-    <Compile Include="Bot\Commands\TaskInfoCommand.cs" />
-    <Compile Include="Bot\Commands\SpecialCommand.cs" />
+    <Compile Include="Bot\Bot.cs" />
+    <Compile Include="Commands\FollowCommand.cs" />
+    <Compile Include="Commands\ListCategoriesCommand.cs" />
+    <Compile Include="Commands\HelpCommand.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\ListTaskCommand.cs" />
+    <Compile Include="Commands\ListTaskInCategoryCommand.cs" />
+    <Compile Include="Commands\TaskInfoCommand.cs" />
+    <Compile Include="Commands\SpecialCommand.cs" />
     <Compile Include="Bot\TelegramBot.cs" />
-    <Compile Include="Bot\Executor.cs" />
-    <Compile Include="Bot\TaskWrapper.cs" />
+    <Compile Include="DatabaseUpdateScheduler.cs" />
+    <Compile Include="Executor.cs" />
+    <Compile Include="TaskWrapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

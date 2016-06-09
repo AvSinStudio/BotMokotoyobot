@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PyTaskBot.Domain.PointsStat" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAABAAAAAAAAUAAAQAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Domain\PointsStat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PyTaskBot.Domain.Student" Collapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Domain\Student.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PyTaskBot.Domain.TakenTask">
+    <Position X="4.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEQABAgAAAAAgAAAAAAAAAAAAABAAABAAAAAA=</HashCode>
+      <FileName>Domain\TakenTask.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PyTaskBot.Domain.Task">
+    <Position X="9" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABBAAgAABAAAAAAAAUAAAQAAAAAQAAAAAAAAAAACAA=</HashCode>
+      <FileName>Domain\Task.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="PointsStat" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="TakenTasks" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="PyTaskBot.Infrastructure.Database&lt;T&gt;">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAEAAAAAAAAAAAAAAAAAAIABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\Database.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PyTaskBot.Infrastructure.JsonDownloader" Collapsed="true">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAA=</HashCode>
+      <FileName>Infrastructure\DatabaseDownloader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PyTaskBot.Infrastructure.PyTaskDatabase">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAACAAAAAAAAAAABACAAAARUAAAAAgASgAIACAA=</HashCode>
+      <FileName>Infrastructure\PyTaskDatabase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PyTaskBot.Infrastructure.StringExtension" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\StringExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PyTaskBot.Infrastructure.Unmarshaller&lt;T&gt;">
+    <Position X="3" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Infrastructure\Unmarshaller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

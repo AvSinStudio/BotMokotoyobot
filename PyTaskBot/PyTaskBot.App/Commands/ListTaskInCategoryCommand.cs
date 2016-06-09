@@ -1,10 +1,10 @@
 ﻿using PyTaskBot.Infrastructure;
 
-namespace PyTaskBot.App.Bot.Commands
+namespace PyTaskBot.App.Commands
 {
     public class ListTaskInCategoryCommand : Command
     {
-        private PyTaskDatabase db;
+        private readonly PyTaskDatabase db;
 
         public ListTaskInCategoryCommand(PyTaskDatabase db) : base("catinfo", "show list of tasks in category")
         {

@@ -13,7 +13,7 @@ namespace PyTaskBot.Domain
 
         [JsonProperty("students")]
         public List<TakenTask> TakenTasks { get; set; }
-        
+
         [JsonProperty("max")]
         private int Max { get; set; }
 
@@ -36,7 +36,7 @@ namespace PyTaskBot.Domain
             Max = Max,
             FullPointsPercent = FullPointsPercent,
             FullPointsCount = FullPointsAmount,
-            Count = TakenTasks.Count 
+            Count = TakenTasks.Count
         };
     }
 }

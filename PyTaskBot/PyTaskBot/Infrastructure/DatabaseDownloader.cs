@@ -5,7 +5,7 @@ namespace PyTaskBot.Infrastructure
 {
     internal static class JsonDownloader
     {
-        public static string DownloadJson(string url, Encoding encoding=null)
+        public static string DownloadJson(string url, Encoding encoding = null)
         {
             if (encoding == null)
             {

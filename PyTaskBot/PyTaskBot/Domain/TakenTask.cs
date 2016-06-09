@@ -19,7 +19,7 @@ namespace PyTaskBot.Domain
 
         [JsonProperty("comment")]
         public string Comment { get; set; }
-       
+
         public Student Student
         {
             get

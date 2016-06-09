@@ -1,6 +1,6 @@
 ﻿using PyTaskBot.Infrastructure;
 
-namespace PyTaskBot.App.Bot.Commands
+namespace PyTaskBot.App.Commands
 {
     public class ListCategoriesCommand : Command
     {

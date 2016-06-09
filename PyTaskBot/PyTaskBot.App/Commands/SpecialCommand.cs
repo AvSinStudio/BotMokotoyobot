@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using PyTaskBot.App.Bot.Wrappers;
 using PyTaskBot.Domain;
 using PyTaskBot.Infrastructure;
 
-namespace PyTaskBot.App.Bot.Commands
+namespace PyTaskBot.App.Commands
 {
     public class SpecialCommand : Command
     {
-        private readonly TaskWrapper taskWrapper;
-        private readonly PyTaskDatabase db;
-
         private const string Regex =
             @"([a-zA-Zа-яёА-ЯЁ\-\., ])?" +
-            @"(?<Scope>(минимальн|максимальн)(ый (средний)? (балл|процент)|ое количество сдавших))" + 
+            @"(?<Scope>(минимальн|максимальн)(ый (средний)? (балл|процент)|ое количество сдавших))" +
             @"( в категории (?<Category>[a-zA-Zа-яёА-ЯЁ\-\., ]+))?(\?)?";
+
+        private readonly PyTaskDatabase db;
+        private readonly TaskWrapper taskWrapper;
 
         public SpecialCommand(PyTaskDatabase db) : base("min", "command to take task with some param")
         {
@@ -70,7 +69,8 @@ namespace PyTaskBot.App.Bot.Commands
 
         public override bool HasAlias(string alias)
         {
-            return Aliases.Any(x => System.Text.RegularExpressions.Regex.Match(alias, x, RegexOptions.IgnoreCase).Success);
+            return
+                Aliases.Any(x => System.Text.RegularExpressions.Regex.Match(alias, x, RegexOptions.IgnoreCase).Success);
         }
     }
 }

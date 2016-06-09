@@ -1,12 +1,11 @@
-﻿using PyTaskBot.App.Bot.Wrappers;
-using PyTaskBot.Infrastructure;
+﻿using PyTaskBot.Infrastructure;
 
-namespace PyTaskBot.App.Bot.Commands
+namespace PyTaskBot.App.Commands
 {
     public class TaskInfoCommand : Command
     {
-        private readonly TaskWrapper taskWrapper;
         private readonly PyTaskDatabase db;
+        private readonly TaskWrapper taskWrapper;
 
         public TaskInfoCommand(PyTaskDatabase db) : base("info", "give info about the task")
         {
@@ -18,7 +17,7 @@ namespace PyTaskBot.App.Bot.Commands
             }
         }
 
-        public override string CreateResponse(params object[]args)
+        public override string CreateResponse(params object[] args)
         {
             var name = args[0] as string;
 

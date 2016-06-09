@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PyTaskBot.App.Bot.Commands
+namespace PyTaskBot.App.Commands
 {
     public abstract class Command
     {
@@ -12,7 +12,7 @@ namespace PyTaskBot.App.Bot.Commands
         {
             Name = name;
             Help = help;
-            Aliases = new HashSet<string> { Name };
+            Aliases = new HashSet<string> {Name};
         }
 
         public string Name { get; }

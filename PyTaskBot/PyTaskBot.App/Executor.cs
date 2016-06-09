@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using PyTaskBot.App.Bot.Commands;
+using PyTaskBot.App.Commands;
 
-namespace PyTaskBot.App.Bot
+namespace PyTaskBot.App
 {
     internal class Executor
     {
         private readonly List<Command> commands = new List<Command>();
-        
+
         public void Register(Command cmd)
         {
             commands.Add(cmd);

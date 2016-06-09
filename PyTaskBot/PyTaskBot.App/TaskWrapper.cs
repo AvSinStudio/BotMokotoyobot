@@ -1,6 +1,6 @@
 ﻿using PyTaskBot.Domain;
 
-namespace PyTaskBot.App.Bot.Wrappers
+namespace PyTaskBot.App
 {
     public class TaskWrapper
     {

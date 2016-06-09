@@ -7,11 +7,11 @@ namespace PyTaskBot.Infrastructure
 {
     public class PyTaskDatabase : Database<Task>
     {
-        public List<string> SortedTasksNames;
-        public HashSet<string> TasksNamesSet;
+        public HashSet<string> CategoriesSet;
 
         public List<string> SortedCategories;
-        public HashSet<string> CategoriesSet;
+        public List<string> SortedTasksNames;
+        public HashSet<string> TasksNamesSet;
 
         public PyTaskDatabase(string uri) : base(uri)
         {
@@ -22,7 +22,7 @@ namespace PyTaskBot.Infrastructure
         {
             Init();
         }
-        
+
         private void Init()
         {
             TasksNamesSet = GetAll(x => x.Name);
@@ -54,11 +54,13 @@ namespace PyTaskBot.Infrastructure
             return Data.OrderBy(scopeFunc).FirstOrDefault();
         }
 
-        public bool IsTask(string query) {
+        public bool IsTask(string query)
+        {
             return TasksNamesSet.Contains(query);
         }
 
-        public bool IsCategory(string query) {
+        public bool IsCategory(string query)
+        {
             return CategoriesSet.Contains(query, StringComparer.OrdinalIgnoreCase);
         }
 
@@ -76,6 +78,12 @@ namespace PyTaskBot.Infrastructure
         {
             var data = new HashSet<Task>(FilterByCategory(category));
             return new PyTaskDatabase(data);
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            Init();
         }
     }
 }
