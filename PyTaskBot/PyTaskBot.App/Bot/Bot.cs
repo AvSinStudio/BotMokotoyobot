@@ -7,6 +7,6 @@ namespace PyTaskBot.App.Bot
         private Executor Executor { get; set; }
         public abstract void SendMessage(TUpdate update, string response);
         public abstract IEnumerable<TUpdate> GetUpdates();
-        public abstract void ListenAndAnswer();
+        public abstract void Run();
     }
 }

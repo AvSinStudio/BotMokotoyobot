@@ -69,9 +69,8 @@
     <Compile Include="Commands\TaskInfoCommand.cs" />
     <Compile Include="Commands\SpecialCommand.cs" />
     <Compile Include="Bot\TelegramBot.cs" />
-    <Compile Include="DatabaseUpdateScheduler.cs" />
+    <Compile Include="Scheduler.cs" />
     <Compile Include="Executor.cs" />
-    <Compile Include="TaskWrapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

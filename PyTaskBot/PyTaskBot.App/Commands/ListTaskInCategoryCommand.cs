@@ -6,16 +6,17 @@ namespace PyTaskBot.App.Commands
     {
         private readonly PyTaskDatabase db;
 
-        public ListTaskInCategoryCommand(PyTaskDatabase db) : base("catinfo", "show list of tasks in category")
+        public ListTaskInCategoryCommand(PyTaskDatabase db)
+            : base(new [] { "catinfo" }, "show list of tasks in category")
         {
             this.db = db;
             foreach (var x in db.CategoriesSet)
             {
-                Aliases.Add(x);
+                Names.Add(x);
             }
         }
 
-        public override string CreateResponse(params object[] args)
+        public override string CreateResponse(object[] args)
         {
             var query = args[0] as string;
 

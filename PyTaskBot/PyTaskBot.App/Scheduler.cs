@@ -3,11 +3,11 @@ using System.Timers;
 
 namespace PyTaskBot.App
 {
-    public class Scheduler<T>
+    public class Scheduler
     {
-        public Scheduler(TimeSpan ts, ElapsedEventHandler elapsed)
+        public Scheduler(TimeSpan interval, ElapsedEventHandler elapsed)
         {
-            var timeChecker = new Timer(ts.TotalMilliseconds);
+            var timeChecker = new Timer(interval.TotalMilliseconds);
             timeChecker.Elapsed += elapsed;
             timeChecker.Enabled = true;
         }

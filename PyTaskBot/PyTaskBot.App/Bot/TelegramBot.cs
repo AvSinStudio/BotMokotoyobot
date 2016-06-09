@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -8,21 +7,23 @@ namespace PyTaskBot.App.Bot
 {
     internal class TelegramBot : Bot<Update>
     {
-        private readonly Executor bgWorker;
         private readonly Api botApi;
-
-        public TelegramBot(string token, Executor executor, Executor backgroungWorker = null)
-        {
-            bgWorker = backgroungWorker;
-            botApi = new Api(token);
-            Executor = executor;
-            var me = botApi.GetMe();
-            Console.WriteLine($"Hello, I'm {me.Result.Username}");
-            Offset = botApi.MessageOffset;
-        }
 
         private Executor Executor { get; }
         private int Offset { get; set; }
+
+        public TelegramBot(string token, Executor executor)
+        {
+            botApi = new Api(token);
+            Executor = executor;
+            Offset = botApi.MessageOffset;
+        }
+
+        public string GetWelcome()
+        {
+            var me = botApi.GetMe();
+            return $"Hello, I'm {me.Result.Username}";
+        }
 
         public override void SendMessage(Update update, string response)
         {
@@ -34,7 +35,12 @@ namespace PyTaskBot.App.Bot
             return botApi.GetUpdates(Offset).Result;
         }
 
-        public override void ListenAndAnswer()
+        private static string GetCommandName(string query)
+        {
+            return query.Split(' ')[0];
+        }
+
+        public override void Run()
         {
             while (true)
             {
@@ -45,13 +51,17 @@ namespace PyTaskBot.App.Bot
                     {
                         Debug.WriteLine(update.Message.Text);
                         botApi.SendChatAction(update.Message.Chat.Id, ChatAction.Typing);
-                        var response = Executor.GetResponse(update.Message.Text, update.Message.Chat.Id);
+
+                        var commandName = GetCommandName(update.Message.Text);
+                        var response = Executor.Execute(commandName, new object[] { update.Message.Text, update.Message.Chat.Id });
+
                         botApi.SendTextMessage(update.Message.Chat.Id, response);
                     }
 
                     Offset = update.Id + 1;
                 }
             }
+            // ReSharper disable once FunctionNeverReturns
         }
     }
 }

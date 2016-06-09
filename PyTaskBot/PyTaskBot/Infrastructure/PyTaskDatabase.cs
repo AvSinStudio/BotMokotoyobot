@@ -7,11 +7,11 @@ namespace PyTaskBot.Infrastructure
 {
     public class PyTaskDatabase : Database<Task>
     {
-        public HashSet<string> CategoriesSet;
-
-        public List<string> SortedCategories;
-        public List<string> SortedTasksNames;
         public HashSet<string> TasksNamesSet;
+        public List<string> SortedTasksNames;
+
+        public HashSet<string> CategoriesSet;
+        public List<string> SortedCategories;
 
         public PyTaskDatabase(string uri) : base(uri)
         {
@@ -37,7 +37,6 @@ namespace PyTaskBot.Infrastructure
             var elements = Data.Select(fieldGetter);
             return new HashSet<string>(elements, StringComparer.OrdinalIgnoreCase);
         }
-
 
         public Task GetTask(string name)
         {
@@ -80,7 +79,7 @@ namespace PyTaskBot.Infrastructure
             return new PyTaskDatabase(data);
         }
 
-        public override void Update()
+        protected override void Update()
         {
             base.Update();
             Init();

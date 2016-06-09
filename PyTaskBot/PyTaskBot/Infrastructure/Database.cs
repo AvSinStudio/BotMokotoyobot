@@ -6,10 +6,18 @@ namespace PyTaskBot.Infrastructure
     {
         private readonly string uri;
 
+        protected HashSet<T> Data { get; private set; }
+
+        private static HashSet<T> DownloadData(string uri) {
+            var json = JsonDownloader.DownloadJson(uri);
+            var db = Unmarshaller<Dictionary<string, T>>.Unmarshal(json);
+            return new HashSet<T>(db.Values);
+        }
+
         protected Database(string uri)
         {
             this.uri = uri;
-            Data = GetData(uri);
+            Data = DownloadData(uri);
         }
 
         protected Database(HashSet<T> data)
@@ -17,17 +25,9 @@ namespace PyTaskBot.Infrastructure
             Data = data;
         }
 
-        protected HashSet<T> Data { get; set; }
-
-        private HashSet<T> GetData(string uri)
+        protected virtual void Update()
         {
-            var json = JsonDownloader.DownloadJson(uri);
-            return new HashSet<T>(Unmarshaller<Dictionary<string, T>>.Unmarshal(json).Values);
-        }
-
-        public virtual void Update()
-        {
-            Data = GetData(uri);
+            Data = DownloadData(uri);
         }
     }
 }

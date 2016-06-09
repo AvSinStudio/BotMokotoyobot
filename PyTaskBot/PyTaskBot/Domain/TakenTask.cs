@@ -25,7 +25,7 @@ namespace PyTaskBot.Domain
             get
             {
                 var name = StudentRaw.Split(' ');
-                return new Student {FirstName = name[0], LastName = name[1]};
+                return new Student { FirstName = name[0], LastName = name[1] };
             }
         }
 

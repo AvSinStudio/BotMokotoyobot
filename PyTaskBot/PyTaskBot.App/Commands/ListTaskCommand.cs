@@ -6,12 +6,13 @@ namespace PyTaskBot.App.Commands
     {
         private readonly PyTaskDatabase db;
 
-        public ListTaskCommand(PyTaskDatabase db) : base("list", "show list of tasks")
+        public ListTaskCommand(PyTaskDatabase db)
+            : base(new [] { "list" }, "show list of tasks")
         {
             this.db = db;
         }
 
-        public override string CreateResponse(params object[] args)
+        public override string CreateResponse(object[] args)
         {
             return string.Join("\n", db.SortedTasksNames);
         }

@@ -5,15 +5,6 @@ namespace PyTaskBot.Domain
 {
     public class Task
     {
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("category")]
-        public string Category { get; set; }
-
-        [JsonProperty("students")]
-        public List<TakenTask> TakenTasks { get; set; }
-
         [JsonProperty("max")]
         private int Max { get; set; }
 
@@ -27,16 +18,34 @@ namespace PyTaskBot.Domain
         private double FullPointsPercent { get; set; }
 
         [JsonProperty("students_full_points")]
-        private int FullPointsAmount { get; set; }
+        private int FullPointsCount { get; set; }
 
-        public PointsStat PointsStat => new PointsStat
-        {
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("category")]
+        public string Category { get; set; }
+
+        [JsonProperty("students")]
+        public List<TakenTask> TakenTasks { get; set; }
+
+        public PointsStat PointsStat => new PointsStat {
             AveragePercent = AveragePercent,
             AveragePoint = AveragePoint,
             Max = Max,
             FullPointsPercent = FullPointsPercent,
-            FullPointsCount = FullPointsAmount,
+            FullPointsCount = FullPointsCount,
             Count = TakenTasks.Count
         };
+
+        public override string ToString()
+        {
+            return $"Таск: {Name}\n\n" +
+                   $"Категория: {Category}\n" +
+                   $"Максимальный балл: {Max}\n" +
+                   $"Средний балл: {AveragePoint} ({AveragePercent}%)\n" +
+                   $"Сдавшие: {TakenTasks.Count}\n" +
+                   $"На полный балл {FullPointsCount} ({FullPointsPercent}%)";
+        }
     }
 }

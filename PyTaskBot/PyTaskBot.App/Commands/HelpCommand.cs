@@ -2,13 +2,13 @@
 {
     public class HelpCommand : Command
     {
-        public HelpCommand() : base("help", "print help")
+        public HelpCommand() : base(new [] { "help" }, "print help")
         {
         }
 
-        public override string CreateResponse(params object[] args)
+        public override string CreateResponse(object[] args)
         {
-            return "Напиши меня.";
+            return "Справка";
         }
     }
 }

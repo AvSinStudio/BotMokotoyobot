@@ -1,26 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Timers;
 using PyTaskBot.App.Bot;
 using PyTaskBot.App.Commands;
-using PyTaskBot.Domain;
 using PyTaskBot.Infrastructure;
 
 namespace PyTaskBot.App
 {
-    internal class Program
+    internal static class Program
     {
-        private static void Main(string[] args)
+        private static Scheduler CreateScheduler()
         {
-            var db = new PyTaskDatabase("http://pytask.info/db/db_full.json");
-            var dbUpdater = new Scheduler<Task>(TimeSpan.FromSeconds(30), (sender, e) => { Console.WriteLine(); });
-            var storage = new Dictionary<long, List<string>>();
-            var token = ConfigurationManager.AppSettings.Get("token");
-            if (token == null)
+            var updateInterval = TimeSpan.FromSeconds(30);
+            ElapsedEventHandler handler = (sender, e) => { Console.WriteLine(); };
+            return new Scheduler(updateInterval, handler);
+        }
+
+        private static string GetSetting(string name)
+        {
+            var setting = ConfigurationManager.AppSettings.Get(name);
+            if (setting == null)
             {
-                throw new ConfigurationErrorsException("You must specify bot token in configuration file");
+                throw new ConfigurationErrorsException($"You must specify ${name} in configuration file");
             }
-            new TelegramBot(token, CreateExecutor(db, storage)).ListenAndAnswer();
+            return setting;
         }
 
         private static Executor CreateExecutor(PyTaskDatabase ptdb, Dictionary<long, List<string>> storage)
@@ -32,8 +36,24 @@ namespace PyTaskBot.App
             executor.Register(new TaskInfoCommand(ptdb));
             executor.Register(new ListTaskInCategoryCommand(ptdb));
             executor.Register(new SpecialCommand(ptdb));
-            executor.Register(new FollowCommand(ptdb, storage, new[] {"фоллоу", "follow", "следить"}));
+            executor.Register(new FollowCommand(ptdb, storage));
             return executor;
+        }
+
+        private static void Main(string[] args)
+        {
+            var scheduler = CreateScheduler();
+
+            var token = GetSetting("token");
+
+            var dbUrl = GetSetting("dbURL");
+            var db = new PyTaskDatabase(dbUrl);
+            var storage = new Dictionary<long, List<string>>();
+            var executor = CreateExecutor(db, storage);
+
+            var tgBot = new TelegramBot(token, executor);
+            Console.WriteLine(tgBot.GetWelcome());
+            tgBot.Run();
         }
     }
 }

@@ -59,7 +59,6 @@
     <Compile Include="Infrastructure\Database.cs" />
     <Compile Include="Infrastructure\DatabaseDownloader.cs" />
     <Compile Include="Infrastructure\PyTaskDatabase.cs" />
-    <Compile Include="Infrastructure\StringExtension.cs" />
     <Compile Include="Infrastructure\Unmarshaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

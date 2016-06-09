@@ -13,20 +13,20 @@ namespace PyTaskBot.App
             commands.Add(cmd);
         }
 
-        public string[] GetAvailableCommandsName()
+        public string[] GetAvailableCommands()
         {
-            return commands.Select(x => x.Name).ToArray();
+            return commands.SelectMany(x => x.Names).ToArray();
         }
 
-        private Command TryGetCommand(string query)
+        private Command TryGetCommand(string commandName)
         {
-            var trimmed = query.Trim('/');
-            return commands.FirstOrDefault(x => x.HasAlias(trimmed));
+            var trimmed = commandName.Trim('/');
+            return commands.FirstOrDefault(x => x.CanBeCalledBy(trimmed));
         }
 
-        public string GetResponse(params object[] args)
+        public string Execute(string commandName, object[] args)
         {
-            var cmd = TryGetCommand(args[0] as string);
+            var cmd = TryGetCommand(commandName);
             return cmd == null ? "Команда не опознана!" : cmd.CreateResponse(args);
         }
     }

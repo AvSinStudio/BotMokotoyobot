@@ -6,23 +6,21 @@ namespace PyTaskBot.App.Commands
 {
     public abstract class Command
     {
-        protected readonly HashSet<string> Aliases;
+        public readonly HashSet<string> Names;
 
-        protected Command(string name, string help)
-        {
-            Name = name;
-            Help = help;
-            Aliases = new HashSet<string> {Name};
-        }
-
-        public string Name { get; }
         public string Help { get; }
 
-        public virtual bool HasAlias(string alias)
+        protected Command(IEnumerable<string> names, string help)
         {
-            return Aliases.Contains(alias, StringComparer.OrdinalIgnoreCase);
+            Names = new HashSet<string>(names);
+            Help = help;
+        }
+        
+        public virtual bool CanBeCalledBy(string name)
+        {
+            return Names.Contains(name, StringComparer.OrdinalIgnoreCase);
         }
 
-        public abstract string CreateResponse(params object[] args);
+        public abstract string CreateResponse(object[] args);
     }
 }
